@@ -16,7 +16,7 @@ func (a *Movement) Error() (err error) {
 
 func (a *Movement) Setup() {}
 
-func (a *Movement) Process(em core.EntityManager) (state int) {
+func (a *Movement) Process(em core.EntityManager, tick int64) (state int) {
 	for _, e := range em.FilterByMask(components.MaskPosition | components.MaskVelocity) {
 		position := e.Get(components.MaskPosition).(*components.Position)
 		velocity := e.Get(components.MaskVelocity).(*components.Velocity)

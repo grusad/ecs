@@ -10,5 +10,5 @@ type Engine interface {
 	Run()
 	Setup()
 	Teardown()
-	Tick()
+	Tick(tick int64)
 }

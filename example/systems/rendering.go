@@ -22,7 +22,7 @@ func (a *Rendering) Setup() {
 	rl.InitWindow(a.width, a.height, a.title)
 }
 
-func (a *Rendering) Process(em core.EntityManager) (state int) {
+func (a *Rendering) Process(em core.EntityManager, tick int64) (state int) {
 	// First check if app should stop.
 	if rl.WindowShouldClose() {
 		return core.StateEngineStop

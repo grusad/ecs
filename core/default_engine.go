@@ -12,7 +12,7 @@ func (e *defaultEngine) Run() {
 	shouldStop := false
 	for !shouldStop {
 		for _, system := range e.systemManager.Systems() {
-			state := system.Process(e.entityManager)
+			state := system.Process(e.entityManager, 0)
 			if state == StateEngineStop {
 				shouldStop = true
 				break
@@ -22,9 +22,9 @@ func (e *defaultEngine) Run() {
 }
 
 // Tick calls the Process() method for each System exactly once
-func (e *defaultEngine) Tick() {
+func (e *defaultEngine) Tick(tick int64) {
 	for _, system := range e.systemManager.Systems() {
-		if state := system.Process(e.entityManager); state == StateEngineStop {
+		if state := system.Process(e.entityManager, tick); state == StateEngineStop {
 			break
 		}
 	}

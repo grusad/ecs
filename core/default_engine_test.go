@@ -1,9 +1,10 @@
 package core_test
 
 import (
+	"testing"
+
 	"github.com/andygeiss/ecs/core"
 	"github.com/andygeiss/utils/assert"
-	"testing"
 )
 
 func TestDefaultEngine(t *testing.T) {
@@ -56,7 +57,7 @@ type mockupSystem struct {
 	Value int
 }
 
-func (s *mockupSystem) Process(entityManager core.EntityManager) (state int) {
+func (s *mockupSystem) Process(entityManager core.EntityManager, tick int64) (state int) {
 	s.Value = 1
 	return core.StateEngineStop
 }

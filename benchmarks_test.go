@@ -2,9 +2,10 @@ package ecs_test
 
 import (
 	"fmt"
-	"github.com/andygeiss/ecs/core"
 	"math/rand"
 	"testing"
+
+	"github.com/andygeiss/ecs/core"
 )
 
 func BenchmarkEntityManager_Get_With_1_Entity_Id_Found(b *testing.B) {
@@ -108,7 +109,7 @@ func generateUseAllEntitiesSystems(count int) []core.System {
 // mockupUseAllEntitiesSystem works on all entities from the defaultEntityManager which represents the worst-case scenario for performance.
 type mockupUseAllEntitiesSystem struct{}
 
-func (s *mockupUseAllEntitiesSystem) Process(entityManager core.EntityManager) (state int) {
+func (s *mockupUseAllEntitiesSystem) Process(entityManager core.EntityManager, tick int64) (state int) {
 	for range entityManager.FilterByMask(1) {
 	}
 	return core.StateEngineContinue
@@ -121,7 +122,7 @@ func (s *mockupUseAllEntitiesSystem) Teardown() {
 // mockupShouldStopSystem is the last System in the queue and should stop the defaultEngine.
 type mockupShouldStopSystem struct{}
 
-func (s *mockupShouldStopSystem) Process(entityManager core.EntityManager) (state int) {
+func (s *mockupShouldStopSystem) Process(entityManager core.EntityManager, tick int64) (state int) {
 	for range entityManager.FilterByMask(1) {
 	}
 	return core.StateEngineStop

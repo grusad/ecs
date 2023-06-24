@@ -18,7 +18,7 @@ func (a *Collision) Error() error {
 
 func (a *Collision) Setup() {}
 
-func (a *Collision) Process(em core.EntityManager) (state int) {
+func (a *Collision) Process(em core.EntityManager, tick int64) (state int) {
 	for _, e := range em.FilterByMask(components.MaskPosition | components.MaskVelocity) {
 		position := e.Get(components.MaskPosition).(*components.Position)
 		velocity := e.Get(components.MaskVelocity).(*components.Velocity)
